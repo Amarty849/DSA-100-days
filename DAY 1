@@ -1,1 +1,51 @@
 //DAY 1
+Question :- Union of Arrays with Duplicates
+
+// SOLUTION
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    vector<int> arr1 = {1, 2, 2, 3, 4};
+    vector<int> arr2 = {2, 3, 5, 6};
+
+    sort(arr1.begin(), arr1.end());
+    sort(arr2.begin(), arr2.end());
+
+    int i = 0, j = 0;
+    vector<int> result;
+
+    while (i < arr1.size() && j < arr2.size()) {
+        if (arr1[i] < arr2[j]) {
+            if (result.empty() || result.back() != arr1[i])
+                result.push_back(arr1[i]);
+            i++;
+        } 
+        else if (arr1[i] > arr2[j]) {
+            if (result.empty() || result.back() != arr2[j])
+                result.push_back(arr2[j]);
+            j++;
+        } 
+        else {
+            if (result.empty() || result.back() != arr1[i])
+                result.push_back(arr1[i]);
+            i++, j++;
+        }
+    }
+
+    while (i < arr1.size()) {
+        if (result.empty() || result.back() != arr1[i])
+            result.push_back(arr1[i]);
+        i++;
+    }
+
+    while (j < arr2.size()) {
+        if (result.empty() || result.back() != arr2[j])
+            result.push_back(arr2[j]);
+        j++;
+    }
+
+    cout << "Union: ";
+    for (int x : result) cout << x << " ";
+    return 0;
+}
