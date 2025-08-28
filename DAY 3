@@ -1,58 +1,34 @@
 //Maximum and minimum of an array using minimum number of comparisons
 
 #include <iostream>
-#include <vector>
+#include <limits.h>
 using namespace std;
 
-pair<int, int> findMinMax(const vector<int>& arr) {
-    int n = arr.size();
-    int minVal, maxVal;
-    int i;
-
-    // If even number of elements
-    if (n % 2 == 0) {
-        if (arr[0] < arr[1]) {
-            minVal = arr[0];
-            maxVal = arr[1];
-        } else {
-            minVal = arr[1];
-            maxVal = arr[0];
+int setmini(int A[], int N)
+{
+    int mini = INT_MAX;
+    for (int i = 0; i < N; i++) {
+        if (A[i] < mini) {
+            mini = A[i];
         }
-        i = 2;
-    } 
-    // If odd number of elements
-    else {
-        minVal = maxVal = arr[0];
-        i = 1;
     }
-
-    // Compare in pairs
-    while (i < n - 1) {
-        int localMin, localMax;
-        if (arr[i] < arr[i + 1]) {
-            localMin = arr[i];
-            localMax = arr[i + 1];
-        } else {
-            localMin = arr[i + 1];
-            localMax = arr[i];
-        }
-
-        if (localMin < minVal) minVal = localMin;
-        if (localMax > maxVal) maxVal = localMax;
-
-        i += 2; // move in pairs
-    }
-
-    return {minVal, maxVal};
+    return mini;
 }
+int setmaxi(int A[], int N)
+{
+    int maxi = INT_MIN;
 
-int main() {
-    vector<int> arr = {100, 23, 45, 2, 89, 300, 1, 76};
-
-    pair<int, int> result = findMinMax(arr);
-
-    cout << "Minimum: " << result.first << endl;
-    cout << "Maximum: " << result.second << endl;
-
-    return 0;
+    for (int i = 0; i < N; i++) {
+        if (A[i] > maxi) {
+            maxi = A[i];
+        }
+    }
+    return maxi;
+}
+int main()
+{
+    int A[] = { 4, 9, 6, 5, 2, 3 };
+    int N = 6;
+    cout <<"Minimum element is: " <<setmini(A, N) << endl;
+    cout <<"Miximum  element is: "<< setmaxi(A, N) << endl;
 }
