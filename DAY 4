@@ -1,0 +1,26 @@
+//BEST TIME TO BUY AND SELL A STOCK
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Return the max profit with exactly one buy and one sell.
+// If profit isn't possible, returns 0.
+int maxProfitOneTrade(const vector<int>& prices) {
+    int minPrice = INT_MAX;
+    int best = 0;
+    for (int p : prices) {
+        minPrice = min(minPrice, p);        // best buy so far
+        best = max(best, p - minPrice);     // sell today
+    }
+    return best;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    // Example:
+    vector<int> prices = {7, 1, 5, 3, 6, 4};
+    cout << maxProfitOneTrade(prices) << "\n"; // outputs 5 (buy at 1, sell at 6)
+    return 0;
+}
